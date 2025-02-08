@@ -1,3 +1,5 @@
+//Escritura y lectura de un vector usando try con recursos, bloques try/catch/finally y mensajes de error. 
+
 import java.io.*;
 import java.util.Vector;
 
@@ -5,6 +7,7 @@ public class ListOfNumbers {
     private Vector<Integer> victor;
     private static final int SIZE = 10;
 
+    //Llenado del vector
     public ListOfNumbers() {
         victor = new Vector<Integer>(SIZE);
         for (int i = 0; i < SIZE; i++) {
@@ -17,12 +20,15 @@ public class ListOfNumbers {
 
     public void readList(String fileName) {
         String line = null;
+        //Try con recursos + Mensaje de error condicional
         try (RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {
             if (raf.length() == 0) { 
                 System.err.println("Error: El archivo " + fileName + " está vacío.");
                 return;  
             }
     
+            //Try normal 
+            //Se realiza la lectura del archivo
             while ((line = raf.readLine()) != null) {
                 try {
                     Integer i = Integer.parseInt(line);
@@ -42,6 +48,7 @@ public class ListOfNumbers {
     public void writeList() {
         PrintWriter out = null;
 
+        //try/catch/Finally
         try {
             out = new PrintWriter(new FileWriter("outfile.txt"));
         
