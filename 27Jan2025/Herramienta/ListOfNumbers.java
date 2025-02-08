@@ -1,32 +1,32 @@
 import java.io.*;
 import java.util.Vector;
 
-public class ListOfNumbers2 {
+public class ListOfNumbers {
     private Vector<Integer> victor;
     private static final int SIZE = 10;
 
-    public ListOfNumbers2() {
+    public ListOfNumbers() {
         victor = new Vector<Integer>(SIZE);
         for (int i = 0; i < SIZE; i++) {
-            victor.addElement(i);  // Usando autoboxing, no es necesario new Integer(i)
+            victor.addElement(i); 
         }
 
-        this.readList("Trycatch/infile.txt");
+        this.readList("infile.txt");
         this.writeList();
     }
 
     public void readList(String fileName) {
         String line = null;
         try (RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {
-            if (raf.length() == 0) {  // Verificar si el archivo está vacío
+            if (raf.length() == 0) { 
                 System.err.println("Error: El archivo " + fileName + " está vacío.");
-                return;  // Salir del método sin procesar nada
+                return;  
             }
     
             while ((line = raf.readLine()) != null) {
                 try {
-                    Integer i = Integer.parseInt(line);  // Convertir a Integer
-                    victor.addElement(i);  // Agregar al Vector
+                    Integer i = Integer.parseInt(line);
+                    victor.addElement(i); 
                 } catch (NumberFormatException e) {
                     System.err.println("Error: Línea inválida en el archivo: " + line);
                 }
@@ -43,7 +43,7 @@ public class ListOfNumbers2 {
         PrintWriter out = null;
 
         try {
-            out = new PrintWriter(new FileWriter("Trycatch/outfile.txt"));
+            out = new PrintWriter(new FileWriter("outfile.txt"));
         
             for (int i = 0; i < victor.size(); i++) {
                 out.println("Value at: " + i + " = " + victor.elementAt(i));
@@ -61,6 +61,6 @@ public class ListOfNumbers2 {
     }
 
     public static void main(String[] args) {
-        new ListOfNumbers2();
+        new ListOfNumbers();
     }
 }
