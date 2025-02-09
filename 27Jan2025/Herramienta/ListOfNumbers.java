@@ -1,4 +1,4 @@
-//Escritura y lectura de un vector usando try con recursos, bloques try/catch/finally y mensajes de error. 
+//Escritura y lectura de un vector usando try con recursos y bloques try/catch/finally y mensajes de error.
 
 import java.io.*;
 import java.util.Vector;
@@ -20,13 +20,13 @@ public class ListOfNumbers {
 
     public void readList(String fileName) {
         String line = null;
-        //Try con recursos + Mensaje de error condicional
+        //Try con recursos + Mensaje de error.
         try (RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {
             if (raf.length() == 0) { 
                 System.err.println("Error: El archivo " + fileName + " está vacío.");
                 return;  
             }
-    
+
             //Try normal 
             //Se realiza la lectura del archivo
             while ((line = raf.readLine()) != null) {
@@ -34,7 +34,7 @@ public class ListOfNumbers {
                     Integer i = Integer.parseInt(line);
                     victor.addElement(i); 
                 } catch (NumberFormatException e) {
-                    System.err.println("Error: Línea inválida en el archivo: " + line);
+                    System.err.println("Error: Linea invalida en el archivo: " + line);
                 }
             }
         } catch (FileNotFoundException fnf) {
@@ -53,16 +53,16 @@ public class ListOfNumbers {
             out = new PrintWriter(new FileWriter("outfile.txt"));
         
             for (int i = 0; i < victor.size(); i++) {
-                out.println("Value at: " + i + " = " + victor.elementAt(i));
+                out.println("Valor del vector en la posición: " + i + " = " + victor.elementAt(i));
             }
         } catch (IOException e) {
             System.err.println("Caught IOException: " + e.getMessage());
         } finally {
             if (out != null) {
-                System.out.println("Closing PrintWriter");
+                System.out.println("Cerrando PrintWriter . . . Ya puedes consultar el archivo creado");
                 out.close();
             } else {
-                System.out.println("PrintWriter not open");
+                System.out.println("PrintWriter no se pudo abrir :/");
             }
         }
     }
